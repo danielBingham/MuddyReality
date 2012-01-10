@@ -1,0 +1,31 @@
+
+Muddy Reality Alpha 0.0001
+
+So I need to write a proper readme file for this, but don't
+have the time or umph at the moment.  This will have to stand
+in.  This is a multi-user dungeon engine that's been in the works
+for some time.  I've been meaning to open source it for about a 
+year, but finally got around to it.  It has moved forward in
+fits and starts when I have time.  And as a result is a little
+disjointed in places where my coding style has changed in between
+sessions.  It is also sorely lacking commenting.  I'll get around
+to it, I swear.  
+
+The general idea behind it was to create a MUD engine that was extraordinarily
+customizable from with in the game itself, with minimal coding.  The idea
+is also to make the world as realistic as is possible in a MUD environment
+throught the application of various ideas.  Eventually I would love to see
+environments that grow, age, are destructible, fully change.  I'm currently
+wrestling with the problem of doing that while still allowing builders
+the maximum amount of freedom to build their world.  I have tons of notes
+that I will attempt to type up and add either to this readme or to the 
+wiki so that anyone jumping in can get some idea of where I'm trying to go
+with this.  You're welcome to use the telnet engine I've built here as
+a base to go somewhere completely different if you like.  But any commits
+to the Muddy Reality trunk will have to match my end vision.  
+
+Anyway, I don't expect many people will actually read this until the engine has
+more structure.  And who knows when that'll be, so.  These probably aren't the
+droids you are looking for.  Move along. 
+
+Daniel Bingham, 1/10/12

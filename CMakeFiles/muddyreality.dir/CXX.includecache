@@ -1,0 +1,40 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/dbingham/Source/middle-earth-mud/alpha6/src/models/ModelFactory/ModelFactory.h
+Account.h
+/home/dbingham/Source/middle-earth-mud/alpha6/src/models/ModelFactory/Account.h
+Character.h
+/home/dbingham/Source/middle-earth-mud/alpha6/src/models/ModelFactory/Character.h
+
+/home/dbingham/Source/middle-earth-mud/alpha6/src/models/ModelFactory/modelFactory.cpp
+ModelFactory.h
+/home/dbingham/Source/middle-earth-mud/alpha6/src/models/ModelFactory/ModelFactory.h
+
+src/models/Account/Account.h
+vector
+-
+Model.h
+src/models/Account/Model.h
+Character.h
+src/models/Account/Character.h
+
+src/models/Character/Character.h
+Model.h
+src/models/Character/Model.h
+Datatypes.h
+src/models/Character/Datatypes.h
+
+src/models/Datatypes.h
+string
+-
+
+src/models/Model.h
+Datatypes.h
+src/models/Datatypes.h
+
