@@ -40,11 +40,15 @@
 
 class AccountMapper: public Mapper {
 	public:
+        AccountMapper(Config *config);
 
+        void modelToXML(Account *account);
+        Account *xmlToModel(); 
 };
 
 class AccountPersister: public SimpleXMLPersister {
 	public:
+        AccountPersistor();
 };
 
 

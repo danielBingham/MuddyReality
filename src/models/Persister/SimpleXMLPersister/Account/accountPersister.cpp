@@ -33,3 +33,24 @@
  * For more information see here: http://www.opensource.org/licenses/mit-license.php
  ***********************************************************************************/
 
+
+AccountMapper::AccountMapper(Config *config):Mapper(config, "Account") {}
+
+String AccountMapper::modelToXML(Account *model) {
+    String xmlResult;
+
+    xmlResult = getOpeningTag() + "\n";
+    xmlResult += "<vnum>" + model->vnum() + "</vnum>\n";
+    xmlResult += "<name>" + model->getName() + "</name>\n";
+    xmlResult += "<password>" + model->getPassword() + "</password>\n";
+    xmlResult += getClosingTag() + "\n";
+
+    return xmlResult;
+}
+
+Account *AccountMapper::xmlToModel() {
+
+
+}
+
+AccountPersistor::AccountPersistor():SimpleXMLPersistor(new AccountMapper()) {}
