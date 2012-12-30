@@ -36,13 +36,12 @@
 #ifndef STORE_H_
 #define STORE_H_
 
-#include "BaseModel.h"
-
 /**
  * The data store class.  It's job is to store, order
  * and allow queries on models that have been loaded
  * into the game.
  */
+template <class Model>
 class Store {
 	public:
 		Store();
@@ -54,7 +53,8 @@ class Store {
 		Model *get(id_num vnum);
 		void add(Model *model);
 
-		void remove(id_num vnum);
+		Model *remove(id_num vnum);
+		void destroy(id_num vnum);
 
 		id_num getNextVnum();
 		bool exists(id_num vnum);
