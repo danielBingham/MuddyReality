@@ -36,50 +36,115 @@
 #ifndef SIMPLEXMLPERSISTER_H_
 #define SIMPLEXMLPERSISTER_H_
 
-#include "BaseModel.h"
 #include "Store.h"
 #include <iostream>
 
+template <class Model>
 class Mapper {
 	public:
-		Mapper(Config *config, String name);
+		Mapper(Config *config);
 		~Mapper();
 
-		virtual Model *xmlToModel(String xml) = 0;
-		virtual void modelToXML(Model *model) = 0;
-
-		void getModelString(ifstream file);
-
-		virtual String getFileName() = 0;
-
+		virtual Model *xmlToModel(rapidxml::xml_node<> file) = 0;
+		virtual String modelToXML(Model *model) = 0;
 
 	protected:
-		String getName();
 		Config *getConfig();
-		String getOpeningTag();
-		String getClosingTag();
 
 	private:
-		String _name;
 		Config *_config;
 };
 
+template <class Model>
 class SimpleXMLPersister: public Persister {
 	public:
-		SimpleXMLPersister();
-		SimpleXMLPersister(Mapper *mapper);
+		SimpleXMLPersister(Store<Model> *store, Mapper<Model> &mapper);
 		~SimpleXMLPersister();
+	
+		void save(String filename, String root);
+		void save(String filename, String root, id_num minVnum, id_num maxVnum);
 
-		void save(Store *store);
-		void load(Store *store);
-
-		virtual Mapper *getMapper();
+		void load(String filename);
 
 	protected:
 
 	private:
-		Mapper *_mapper;
+		Store<Model> *_store;
+		Mapper<Model> _mapper;
+
+		String _fileContents;
+		rapidxml::xml_document<> _parsedFile;
 
 };
 
+/********************************************************************************
+ * START Mapper
+ ********************************************************************************/
+template <class Model>
+Mapper<Model>::Mapper(Config *config) {
+	_config = config;
+}
+
+template <class Model>
+Mapper<Model>::~Mapper() {}
+
+template <class Model>
+Config *Mapper<Model>::getConfig() {return _config;}
+
+/********************************************************************************
+ * END Mapper / START SimpleXMLPersister
+ ********************************************************************************/
+
+template <class Model>
+SimpleXMLPersister::SimpleXMLPersister(Store<Model> *store, Mapper<Model> &mapper) {
+	_store = store;
+	_mapper = mapper;
+}
+template <class Model>
+SimpleXMLPersister<Model>::~SimpleXMLPersister() {}
+
+template <class Model>
+void SimpleXMLPersister<Model>::save(String filename, String root, id_num minVnum, id_num maxVnum) {
+	ostream file(filename);
+	file << "<" << root << " min=\"" << minVnum << "\" max=\"" << maxVnum << "\">\n"; 
+
+	StoreIterator it(_store);
+	for(Model *toSave = it.begin(minVnum, maxVnum); toSave != NULL; toSave = it.next()) {
+		 file << _mapper.modelToXML(toSave);
+	}
+	file << "</" << root << ">\n";
+	file.close();
+}
+
+template <class Model>
+void SimpleXMLPersistor<Model>::save(String filename, String root) {
+	ostream file(filename);
+	file << "<" << root << " min=\"" << minVnum << "\" max=\"" << maxVnum << "\">\n"; 
+
+	StoreIterator it(_store);
+	for(Model *toSave = it.begin(minVnum, maxVnum); toSave != NULL; toSave = it.next()) {
+		 file << _mapper.modelToXML(toSave);
+	}
+	file << "</" << root << ">\n";
+	file.close();
+
+template <class Model>
+void SimpleXMLPersister<Model>::load(String filename) {
+	istream file(filename);
+	String buf;
+	while(file.good()) {
+		getline(file, buf);
+		_fileContents += buf;	
+	}
+	_parsedFile.parse(_fileContents.c_str());
+
+	for(xml_node<> modelNode = _parsedFile.first_node(); modelNode; modelNode = modelNode.next_sibling()) {
+		_store->add(mapper.xmlToModel(modelNode);
+	}
+	file.close();
+}
+
+/********************************************************************************
+ * END SimpleXMLPersister
+ ********************************************************************************/
 #endif /* SIMPLEXMLPERSISTER_H_ */
