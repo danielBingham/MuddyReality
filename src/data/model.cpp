@@ -1,9 +1,9 @@
 /***********************************************************************************
- * File: Config.h
+ * File: baseModel.cpp
  * Definition:
  *
  * Contents:
- *
+ *  
  *
  * Copyright:
  *		Copyright (C) 2009-2011 Daniel Bingham (http://www.theroadgoeson.com)
@@ -31,28 +31,29 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  * For more information see here: http://www.opensource.org/licenses/mit-license.php
- *
  ***********************************************************************************/
-#ifndef CONFIG_H_
-#define CONFIG_H_
 
-class Config {
-	public:
-		Config();
-		~Config();
+#include "BaseModel.h"
 
-		String getLibraryPath();
+/********************************************************************************
+ * START Model
+ ********************************************************************************/
 
-		String getAccountPath();
-		String getCharacterPath();
+Model::Model() {_virtualNumber = 0;}
+Model::Model(id_num vn) {_virtualNumber = vn;}
+Model::~Model() {}
+
+id_num Model::vnum() {return _virtualNumber;}
+void Model::vnum(id_num vn) {_virtualNumber = vn;}
+
+/********************************************************************************
+ * END Model
+ ********************************************************************************/
 
 
-	private:
-		String _libraryPath;
-		String _characterPath;
-		String _accountPath;
 
 
-};
 
-#endif /* CONFIG_H_ */
+
+
+

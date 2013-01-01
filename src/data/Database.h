@@ -1,9 +1,9 @@
 /***********************************************************************************
- * File: Config.h
+ * File: GameLibrary.h
  * Definition:
  *
  * Contents:
- *
+ *  
  *
  * Copyright:
  *		Copyright (C) 2009-2011 Daniel Bingham (http://www.theroadgoeson.com)
@@ -31,28 +31,25 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  * For more information see here: http://www.opensource.org/licenses/mit-license.php
- *
  ***********************************************************************************/
-#ifndef CONFIG_H_
-#define CONFIG_H_
 
-class Config {
+#ifndef DATABASE_H_ 
+#define DATABASE_H_ 
+
+#include "Store.h"
+
+class Database {
 	public:
-		Config();
-		~Config();
+		Database();
+		~Database();
 
-		String getLibraryPath();
+		Store<Account> accounts;
+		Store<Being> characters;
 
-		String getAccountPath();
-		String getCharacterPath();
-
-
-	private:
-		String _libraryPath;
-		String _characterPath;
-		String _accountPath;
-
-
+		Store<Being> npcs;
+		Store<Place> places;
+		Store<Object> objects;
 };
 
-#endif /* CONFIG_H_ */
+
+#endif /* DATABASE_H */

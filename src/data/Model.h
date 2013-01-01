@@ -1,9 +1,9 @@
 /***********************************************************************************
- * File: Config.h
- * Definition:
+ * File: BaseModel.h
+ * Definition: Contains the base classes for the model structures.
  *
  * Contents:
- *
+ *  
  *
  * Copyright:
  *		Copyright (C) 2009-2011 Daniel Bingham (http://www.theroadgoeson.com)
@@ -31,28 +31,30 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  * For more information see here: http://www.opensource.org/licenses/mit-license.php
- *
  ***********************************************************************************/
-#ifndef CONFIG_H_
-#define CONFIG_H_
 
-class Config {
+#ifndef BASEMODEL_H_
+#define BASEMODEL_H_
+
+#include "Datatypes.h"
+
+/**
+ * Base model class.
+ */
+class Model {
 	public:
-		Config();
-		~Config();
+		Model();
+		Model(id_num vn);
+		~Model();
 
-		String getLibraryPath();
+		id_num vnum();
+		void vnum(id_num vn);
 
-		String getAccountPath();
-		String getCharacterPath();
-
+		String name;
 
 	private:
-		String _libraryPath;
-		String _characterPath;
-		String _accountPath;
-
+		id_num _virtualNumber;
 
 };
 
-#endif /* CONFIG_H_ */
+#endif /* BASEMODEL_H_ */

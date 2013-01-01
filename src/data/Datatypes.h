@@ -1,9 +1,5 @@
-/***********************************************************************************
- * File: Config.h
- * Definition:
- *
- * Contents:
- *
+/*
+ * Datatypes.h
  *
  * Copyright:
  *		Copyright (C) 2009-2011 Daniel Bingham (http://www.theroadgoeson.com)
@@ -31,28 +27,15 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  * For more information see here: http://www.opensource.org/licenses/mit-license.php
- *
- ***********************************************************************************/
-#ifndef CONFIG_H_
-#define CONFIG_H_
+ */
 
-class Config {
-	public:
-		Config();
-		~Config();
+#ifndef DATATYPES_H_
+#define DATATYPES_H_
 
-		String getLibraryPath();
+#include <string>
 
-		String getAccountPath();
-		String getCharacterPath();
+typedef std::string String;
+typedef unsigned long id_num;
 
 
-	private:
-		String _libraryPath;
-		String _characterPath;
-		String _accountPath;
-
-
-};
-
-#endif /* CONFIG_H_ */
+#endif /* DATATYPES_H_ */

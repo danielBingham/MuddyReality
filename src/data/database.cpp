@@ -1,9 +1,9 @@
 /***********************************************************************************
- * File: Config.h
+ * File: gameLibrary.cpp
  * Definition:
  *
  * Contents:
- *
+ *  
  *
  * Copyright:
  *		Copyright (C) 2009-2011 Daniel Bingham (http://www.theroadgoeson.com)
@@ -31,28 +31,41 @@
  * USE OR OTHER DEALINGS IN THE SOFTWARE.
  *
  * For more information see here: http://www.opensource.org/licenses/mit-license.php
- *
  ***********************************************************************************/
-#ifndef CONFIG_H_
-#define CONFIG_H_
 
-class Config {
-	public:
-		Config();
-		~Config();
+#include "Database.h"
 
-		String getLibraryPath();
+/********************************************************************************
+ * START Database
+ ********************************************************************************/
 
-		String getAccountPath();
-		String getCharacterPath();
+Database::Database(Config &config) {
+	// Load places
+	PlacesMapper placeMapper;
+	Persistor<Place> placePersistor(places, placeMapper);
+	placePersistor.load(config.getPlacesPath());
 
+	// Load objects
+	ObjectMapper objectMapper;
+	Persistor<Object> objectPersistor(objects, objectMapper);
+	objectPersistor.load(config.getObjectsPath());
+	
 
-	private:
-		String _libraryPath;
-		String _characterPath;
-		String _accountPath;
+	// Load npcs 
+	BeingMapper beingMapper;
+	Persistor<Being> npcPersistor(npcs, beingMapper);
+	npcPersistor.load(config.getNpcPath());
 
+	// Load characters	
+	Persistor<Being> characterPersistor(characters, mapper);
+	characterPersistor.load(config.getCharacterPath());
+	
 
-};
+	// Load accounts
+	AccountMapper mapper;
+	Persistor<Account> accountPersistor(accounts, mapper);
+	accountPersistor.load(config.getAccountPath());	
+}
 
-#endif /* CONFIG_H_ */
+Database::~Database() {}
+
